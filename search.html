@@ -34,7 +34,7 @@
                     $("#outputHigh").text(data2.results[0].daily[0].high); 
                     $("#outputLow").text(data2.results[0].daily[0].low); 
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function(jqXHR2, textStatus2, errorThrown2) {
                     document.getElementById("outputCity").innerHTML = "错误嘞，可能是API寄了噢";
                     document.getElementById("outputWeather").innerHTML = "错误嘞";  
                     document.getElementById("outputHigh").innerHTML = "错误嘞";
@@ -42,7 +42,7 @@
                 }
             });
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR1, textStatus1, errorThrown1) {
             document.getElementById("outputCity").innerHTML = "错误嘞，可能是API或网络寄了噢";
             document.getElementById("outputWeather").innerHTML = "错误嘞";  
             document.getElementById("outputHigh").innerHTML = "错误嘞";
