@@ -1,0 +1,59 @@
+<style>
+    .weather {
+        position: relative;
+        font-size: 13px;
+    }
+    .spaner {
+        display: inline;
+    }
+</style>
+<div class="weather">我在哪里噢？答：<span id="outputCity" class="spaner"></span></div>
+<div class="weather">今日天气🌤：<span id="outputWeather" class="spaner"></span></div>
+<div class="weather">最高温度☀：<span id="outputHigh" class="spaner"></span>℃，最低温度☁：<span id="outputLow" class="spaner"></span>℃</div>
+<div id="dataContainer"></div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- 可更换本地jQuery文件，或者速度更快的jQueryCDN -->
+<script>
+    var amapKey = "你的KEY"; //高德地图的KEY，请替换成您自己的KEY
+    var seniverseKey = "你的KEY"; //心知天气的KEY，请替换成您自己的KEY
+    document.title = "生活仍然很美好^_^，所以还请多多加油喔！"
+    try{
+        $.ajax({
+        url: 'https://restapi.amap.com/v3/ip?key='+amapKey, 
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(data1, textStatus1, jqXHR1) {
+            //console.log(data1); // 输出API返回的数据
+            $("#outputCity").text(data1.city);
+            $.ajax({
+                url: 'https://api.seniverse.com/v3/weather/daily.json?key='+seniverseKey+'&&location='+data1.city, 
+                type: 'GET',
+                dataType: 'json',
+                success: function(data2, textStatus2, jqXHR2) {
+                    //console.log(data2); // 输出API返回的数据
+                    $("#outputWeather").text(data2.results[0].daily[0].text_day); 
+                    $("#outputHigh").text(data2.results[0].daily[0].high); 
+                    $("#outputLow").text(data2.results[0].daily[0].low); 
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    document.getElementById("outputCity").innerHTML = "错误嘞，可能是API寄了噢";
+                    document.getElementById("outputWeather").innerHTML = "错误嘞";  
+                    document.getElementById("outputHigh").innerHTML = "错误嘞";
+                    document.getElementById("outputLow").innerHTML = "错误嘞";
+                }
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            document.getElementById("outputCity").innerHTML = "错误嘞，可能是API或网络寄了噢";
+            document.getElementById("outputWeather").innerHTML = "错误嘞";  
+            document.getElementById("outputHigh").innerHTML = "错误嘞";
+            document.getElementById("outputLow").innerHTML = "错误嘞";
+            }
+        });
+    } catch(error) {
+        document.getElementById("outputCity").innerHTML = "错误嘞，可能是jQuery没有拉取成功噢";
+        document.getElementById("outputWeather").innerHTML = "错误嘞";
+        document.getElementById("outputHigh").innerHTML = "错误嘞";
+        document.getElementById("outputLow").innerHTML = "错误嘞";
+        console.log(error);
+    }
+</script>
