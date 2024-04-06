@@ -2,7 +2,7 @@
   - 搜索框内容可修改
   - 通过地图API获取当前位置
   - 通过天气API获取当前位置天气
-  - <img src="https://github.com/JackA1ltman/via-custom-search/blob/main/Screenshot1.jpg" width="720px">
+  - <img src="https://github.com/JackA1ltman/via-custom-search/blob/main/Screenshot1.jpg" width="360px">
 # 安装方式
   - 打开Via（恐怕是最简单的一步）
   - 点击右下角**菜单**
